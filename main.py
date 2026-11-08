@@ -31,6 +31,19 @@ def countries():
     return list(data.keys())
 
 
+@app.get('/countries/{country}/cities')
+def cities(country: str):
+    return list(data[country].keys())
+
+
+def test_cities_spain():
+    from fastapi.testclient import TestClient
+
+    response = TestClient(app).get('/countries/Spain/cities')
+    assert response.status_code == 200
+    assert response.json() == ['Seville']
+
+
 @app.get('/countries/{country}/{city}/{month}')
 def monthly_average(country: str, city: str, month: str):
     return data[country][city][month]

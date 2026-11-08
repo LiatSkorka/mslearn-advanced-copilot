@@ -11,6 +11,32 @@ Gain more practical experience by using this repository that contains a Python W
 1. Enable your [GitHub Copilot service](https://github.com/github-copilot/signup)
 1. Open [this repository with Codespaces](https://codespaces.new/MicrosoftDocs/mslearn-copilot-codespaces-python)
 
+## Run the project
+
+The API requires Python 3.10 or later. From the repository root, create a virtual environment, install the dependencies, and start the development server:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Open [http://localhost:8000/docs](http://localhost:8000/docs) to explore the API. The root URL redirects to the same documentation. Run the tests with:
+
+```bash
+pytest
+```
+
+To run the API in Docker, build the image from the repository root and start a container:
+
+```bash
+docker build -t travel-weather-api .
+docker run --rm -p 8000:8000 travel-weather-api
+```
+
+The API provides `GET /countries`, `GET /countries/{country}/cities`, and `GET /countries/{country}/{city}/{month}`.
+
 ## 💪🏽 Exercise
 The current API is not exposing country/{country} which needs to be implemented to list cities. The route should allow only GET HTTP requests with a JSON response providing information from the historical high and low for that country, city, and given month.
 
